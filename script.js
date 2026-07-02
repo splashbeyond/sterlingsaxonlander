@@ -5,6 +5,7 @@ const navToggle = document.querySelector("[data-nav-toggle]");
 const navMenu = document.querySelector("[data-nav-menu]");
 const year = document.querySelector("[data-year]");
 const heroVideo = document.querySelector(".hero-media video");
+const desktopVideoQuery = window.matchMedia("(min-width: 641px)");
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -22,6 +23,11 @@ if (heroVideo) {
   heroVideo.playsInline = true;
 
   const startHeroVideo = () => {
+    if (!desktopVideoQuery.matches) {
+      heroVideo.pause();
+      return;
+    }
+
     const playAttempt = heroVideo.play();
 
     if (playAttempt && typeof playAttempt.catch === "function") {
@@ -36,6 +42,8 @@ if (heroVideo) {
   } else {
     startHeroVideo();
   }
+
+  desktopVideoQuery.addEventListener("change", startHeroVideo);
 }
 
 navToggle?.addEventListener("click", () => {

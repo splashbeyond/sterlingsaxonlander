@@ -233,12 +233,14 @@ textarea {
 
 .hero-media,
 .hero-media video,
+.hero-media img,
 .hero-shade {
   position: absolute;
   inset: 0;
 }
 
-.hero-media video {
+.hero-media video,
+.hero-media img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -246,6 +248,10 @@ textarea {
   opacity: 0.66;
   transform: scale(1.04);
   animation: heroImageSettle 1400ms var(--reveal-ease) forwards;
+}
+
+.hero-mobile-still {
+  display: none !important;
 }
 
 .hero-shade {
@@ -754,7 +760,8 @@ textarea:focus {
     min-height: 82svh;
   }
 
-  .hero-media video {
+  .hero-media video,
+  .hero-media img {
     object-position: 60% center;
   }
 
@@ -787,6 +794,14 @@ textarea:focus {
   .hero {
     padding-top: 92px;
     padding-bottom: 36px;
+  }
+
+  .hero-media video {
+    display: none;
+  }
+
+  .hero-mobile-still {
+    display: block !important;
   }
 
   h1 {
