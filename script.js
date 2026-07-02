@@ -4,6 +4,7 @@ const header = document.querySelector("[data-header]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const navMenu = document.querySelector("[data-nav-menu]");
 const year = document.querySelector("[data-year]");
+const heroVideo = document.querySelector(".hero-media video");
 
 if (year) {
   year.textContent = new Date().getFullYear();
@@ -15,6 +16,27 @@ const updateHeader = () => {
 
 updateHeader();
 window.addEventListener("scroll", updateHeader, { passive: true });
+
+if (heroVideo) {
+  heroVideo.muted = true;
+  heroVideo.playsInline = true;
+
+  const startHeroVideo = () => {
+    const playAttempt = heroVideo.play();
+
+    if (playAttempt && typeof playAttempt.catch === "function") {
+      playAttempt.catch(() => {
+        heroVideo.setAttribute("controls", "");
+      });
+    }
+  };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", startHeroVideo, { once: true });
+  } else {
+    startHeroVideo();
+  }
+}
 
 navToggle?.addEventListener("click", () => {
   const isOpen = navToggle.getAttribute("aria-expanded") === "true";
